@@ -9,16 +9,13 @@ public class Basic{
 			"\t4. Chances of winning this game is 1%.\n"+
 			"\t5. Balance cannot be more than 1000.\n\n");
 	}
-	// public static void main(String[] args) {
-	// 	rules();
-	// }
 	public void welcome(){
 		System.out.println("\n\t\t======== WELCOME TO CASINO NUMBER GAME =======\n");
 	}
 	public void win(){
-		System.out.print("\n\nCongratulations, You've won the Jackpot!");
+		System.out.print("\n\n  Congratulations, You've won the Jackpot!");
 	}
 	public void lose(){
-		System.out.print("\n\nBetter Luck Next Time!");
+		System.out.print("\n\n  Better Luck Next Time!");
 	}
 }
