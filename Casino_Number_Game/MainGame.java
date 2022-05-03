@@ -10,7 +10,7 @@ public class MainGame{
 	Basic basic1 = new Basic();
 	Data data1 = new Data();
 	int actualNumber = R_Num.nextInt(10);
-	String userInput;
+	// String userInput;
 	int guess, nobal;
 	boolean answer = true;
 	public void NumberGame(){
@@ -46,10 +46,10 @@ public class MainGame{
 			}while(!answer);
 		}
 	}
-	boolean askUserYN(){
-	    // Scanner sc = new Scanner(System.in);
+	public boolean askUserYN(){
+	    Scanner sc = new Scanner(System.in);
 	    String userInput;
-	    System.out.print("\nPlease Enter Your Choice (Y or N): ");
+	    System.out.print("\n\nDo you want to continue?(Y or N): ");
 	    userInput = sc.nextLine();
 
 	    if (userInput.length() > 1) {

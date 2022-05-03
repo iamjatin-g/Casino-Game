@@ -2,7 +2,7 @@ package NumGame;
 import java.util.*;
 import java.io.*;
 import java.net.*;
-
+ 
 public class Data{
 	Scanner sc = new Scanner(System.in);
 	String name;
@@ -64,7 +64,7 @@ public class Data{
 		}
 	}
 	public void ifNegAmount(){
-		if(balance<0){
+		if(amount<0){
 			System.out.print("\nInvalid Amount!\nPlease Enter a valid Balance to play the game.");
 			amountToBet();
 		}
