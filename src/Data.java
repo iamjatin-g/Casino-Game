@@ -5,35 +5,45 @@ import java.net.*;
  
 public class Data{
 	Scanner sc = new Scanner(System.in);
-	String name;
-	int balance, amount, temp;
+	String name, balance;
+	int integerBalance, amount, temp;
 	public void accName(){
 		System.out.print("\n  Please, Enter Your Name : ");
 		name = sc.nextLine();
 	}
 	public void accBalance(){
-		System.out.print("\n  Please, Enter the starting balance to play the game : $");
-		balance = sc.nextInt();
-		ifNegBalance();
-		ifMoreBalance();
+		System.out.print("  Please, Enter the starting balance to play the game : $");
+		balance = sc.nextLine();
+		try 
+		{ 
+			integerBalance = Integer.parseInt(balance);
+			ifNegBalance();
+			ifMoreBalance();
+		}  
+		catch (NumberFormatException e)  
+		{ 
+			System.out.println("--> Please Enter a Valid Amount!");
+			accBalance();
+		} 
+		
 	}
 	public void yourBalance(){
 		System.out.print("\n  Your Balance is : $"+balance);
 	}
 	public void ifMoreBalance(){
-		if(balance>1000){
-			System.out.print("\n  Balance cannot be more than $1000");
+		if(integerBalance>1000){
+			System.out.println("--> Balance cannot be more than $1000");
 			accBalance();
 		}
 	}
 	public void ifNegBalance(){
-		if(balance<0){
+		if(integerBalance<0){
 			System.out.print("\n  Invalid Balance!\n  Please Enter a valid Balance to play the game.");
 			accBalance();
 		}
 	}
 	public int ifNoBalance(){
-		if(balance==0){
+		if(integerBalance==0){
 			System.out.print("\n\n  Oops, You Don't have enough balance to play!\n");
 			return 1;
 		}
@@ -46,16 +56,16 @@ public class Data{
 		ifGreaterAmount();
 	}
 	public void losingAmount(){
-		balance-=amount;
-		System.out.print("\n  Your Balance is : $"+balance);
+		integerBalance-=amount;
+		System.out.print("\n  Your Balance is : $"+integerBalance);
 	}
 	public void winningAmount(){
 		temp = 10 * amount;
-		balance += temp; 
-		System.out.print("\n  Your Balance is : $"+balance);
+		integerBalance += temp; 
+		System.out.print("\n  Your Balance is : $"+integerBalance);
 	}
 	public void ifGreaterAmount(){
-		if(amount>balance){
+		if(amount>integerBalance){
 			System.out.print("\n  Invalid Amount!\n  Please Enter a valid Balance to play the game.");
 			amountToBet();
 		}
