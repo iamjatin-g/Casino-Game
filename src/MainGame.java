@@ -10,54 +10,61 @@ public class MainGame{
 	Basic basic1 = new Basic(); 
 	Data data1 = new Data();
 	int actualNumber = R_Num.nextInt(10);
-	int guess, nobal, i;
+	String guess, input;
+	int integerGuess, nobal, integerInput;
 	public void NumberGame(){
 		clear();
 		basic1.rules();
 		data1.accName();
 		data1.accBalance();
-		data1.ifNegBalance();
-		data1.ifMoreBalance();
 		do{
 			clear();
 			basic1.welcome();
 			data1.yourBalance();
 			data1.amountToBet();
-			data1.ifGreaterAmount();
 			actualNumber = R_Num.nextInt(10);
 			guessNumber();
-			ifSmallerGuess();
-			ifGreaterGuess();
 			displayNumber();
 			actualGame();
 			nobal = data1.ifNoBalance();
 			if(nobal == 1){
-				System.out.print("\n  See you Next Time!\n");
+				System.out.println("  --> Thanks for Playing!\n  --> See you Next Time!\n");
 				break;
 			}
 			accInput();
-		}while(i==1);
+		}while(integerInput==1);
 	}
 	public void accInput(){
-		System.out.print("\n\n  -->Do you want to play again?\n  1.Yes\n  2.No\n  Enter (1/2) here : ");
-		i = sc.nextInt();
-		checkInput();
+		System.out.print("\n\n  --> Do you want to play again?\n  --> 1.Yes\n  --> 2.No\n  --> Enter (1/2) here : ");
+		input = sc.nextLine();
+		validateInput();
+		// validInput();
 	}
-	public void checkInput(){
-		if(i<1){
-			System.out.print("\n  Invalid Input!\n  Please, Enter Valid Input!");
+	public void validateInput(){
+		try{ 
+			integerInput = Integer.parseInt(input);
+			validInput();
+		}  
+		catch (NumberFormatException e){ 
+			data1.invalidInput();
 			accInput();
 		}
-		else if(i>2){
-			System.out.print("\n  Invalid Input!\n  Please, Enter Valid Input!");
+	}
+	public void validInput(){
+		if(integerInput<1){
+			data1.invalidInput();
 			accInput();
 		}
-	}
-	public void displayNumber(){
-		System.out.print("\n  The Winning Number was "+actualNumber);
+		else if(integerInput>2){
+			data1.invalidInput();
+			accInput();
+		}
+		else if(integerInput==2){
+			System.out.println("\n\n  --> Thanks for Playing!\n      See you Next Time :)\n");
+		}
 	}
 	public void actualGame(){
-		if(guess==actualNumber){
+		if(integerGuess==actualNumber){
 			basic1.win();
 			data1.winningAmount();
 		}
@@ -66,21 +73,32 @@ public class MainGame{
 			data1.losingAmount();
 		}
 	}
-	public void guessNumber(){
-		System.out.print("\n  Guess any Number between 1-10 : ");
-		guess = sc.nextInt();
-		ifSmallerGuess();
-		ifGreaterGuess();
+	public void displayNumber(){
+		System.out.println("\n  --> The Winning Number was "+actualNumber);
 	}
-	public void ifSmallerGuess(){
-		if(guess<0){
-			System.out.print("\n Invalid Guess!\n Please,");
+	public void guessNumber(){
+		System.out.print("\n  Guess any Number between 0-10 : ");
+		guess = sc.nextLine();
+		validateGuess();
+		validGuess();
+	}
+	public void validateGuess(){
+		try{ 
+			integerGuess = Integer.parseInt(guess);
+			validGuess();
+		}  
+		catch (NumberFormatException e){ 
+			data1.invalidInput();
 			guessNumber();
 		}
 	}
-	public void ifGreaterGuess(){
-		if(guess>10){
-			System.out.print("\n Invalid Guess!\n  Please,");
+	public void validGuess(){
+		if(integerGuess<0){
+			System.out.print("\n  --> Invalid Guess!\n Please,");
+			guessNumber();
+		}
+		else if(integerGuess>10){
+			System.out.print("\n  --> Invalid Guess!\n  Please,");
 			guessNumber();
 		}
 	}

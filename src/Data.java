@@ -5,41 +5,62 @@ import java.net.*;
  
 public class Data{
 	Scanner sc = new Scanner(System.in);
-	String name, balance;
-	int integerBalance, amount, temp;
+	String name, balance, amount;
+	int integerBalance, integerAmount, temp;
 	public void accName(){
 		System.out.print("\n  Please, Enter Your Name : ");
 		name = sc.nextLine();
 	}
 	public void accBalance(){
-		System.out.print("  Please, Enter the starting balance to play the game : $");
+		System.out.print("\n  Please, Enter the starting balance to play the game : $");
 		balance = sc.nextLine();
-		try 
-		{ 
+		validateBalance();
+		validBalance();
+	}
+	public void amountToBet(){
+		System.out.print("\n\n  Hey " + name + ", please enter the amount to bet : $");
+		amount = sc.nextLine();
+		validateAmount();
+		validAmount();
+	}
+	public void validateBalance(){
+		try{ 
 			integerBalance = Integer.parseInt(balance);
-			ifNegBalance();
-			ifMoreBalance();
+			validBalance();
 		}  
-		catch (NumberFormatException e)  
-		{ 
-			System.out.println("--> Please Enter a Valid Amount!");
+		catch (NumberFormatException e){ 
+			invalidInput();
 			accBalance();
-		} 
-		
+		}
 	}
-	public void yourBalance(){
-		System.out.print("\n  Your Balance is : $"+balance);
+	public void validateAmount(){
+		try{ 
+			integerAmount = Integer.parseInt(amount);
+			validAmount();
+		}  
+		catch (NumberFormatException e){ 
+			invalidInput();
+			amountToBet();
+		}
 	}
-	public void ifMoreBalance(){
+	public void validBalance(){
 		if(integerBalance>1000){
 			System.out.println("--> Balance cannot be more than $1000");
 			accBalance();
 		}
-	}
-	public void ifNegBalance(){
-		if(integerBalance<0){
-			System.out.print("\n  Invalid Balance!\n  Please Enter a valid Balance to play the game.");
+		else if(integerBalance<0){
+			invalidInput();
 			accBalance();
+		}
+	}
+	public void validAmount(){
+		if(integerAmount>integerBalance){
+			invalidInput();
+			amountToBet();
+		}
+		else if(integerAmount<0){
+			invalidInput();
+			amountToBet();
 		}
 	}
 	public int ifNoBalance(){
@@ -49,31 +70,19 @@ public class Data{
 		}
 		return 5;
 	}
-	public void amountToBet(){
-		System.out.print("\n\n  Hey " + name + ", please enter the amount to bet : $");
-		amount = sc.nextInt();
-		ifNegAmount();
-		ifGreaterAmount();
-	}
 	public void losingAmount(){
-		integerBalance-=amount;
+		integerBalance -= integerAmount;
 		System.out.print("\n  Your Balance is : $"+integerBalance);
 	}
 	public void winningAmount(){
-		temp = 10 * amount;
-		integerBalance += temp; 
+		temp = 10 * integerAmount;
+		integerBalance += temp;
 		System.out.print("\n  Your Balance is : $"+integerBalance);
 	}
-	public void ifGreaterAmount(){
-		if(amount>integerBalance){
-			System.out.print("\n  Invalid Amount!\n  Please Enter a valid Balance to play the game.");
-			amountToBet();
-		}
+	public void yourBalance(){
+		System.out.print("\n  Your Balance is : $"+integerBalance);
 	}
-	public void ifNegAmount(){
-		if(amount<0){
-			System.out.print("\n  Invalid Amount!\n  Please Enter a valid Balance to play the game.");
-			amountToBet();
-		}
+	public void invalidInput(){
+		System.out.print("\n  --> Invalid Input!\n  --> Please Enter a valid input to play the game.\n");
 	}
 }
