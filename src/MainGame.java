@@ -33,6 +33,8 @@ public class MainGame{
 			}
 			accInput();
 		}while(integerInput==1);
+		System.out.print("Press Enter to EXIT. ");
+		String trash = sc.nextLine();
 	}
 	public void accInput(){
 		System.out.print("\n\n  --> Do you want to play again?\n  --> 1.Yes\n  --> 2.No\n  --> Enter (1/2) here : ");

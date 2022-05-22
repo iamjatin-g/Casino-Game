@@ -48,7 +48,7 @@ public class Data{
 			System.out.println("--> Balance cannot be more than $1000");
 			accBalance();
 		}
-		else if(integerBalance<0){
+		else if(integerBalance<=0){
 			invalidInput();
 			accBalance();
 		}
@@ -58,7 +58,7 @@ public class Data{
 			invalidInput();
 			amountToBet();
 		}
-		else if(integerAmount<0){
+		else if(integerAmount<=0){
 			invalidInput();
 			amountToBet();
 		}
